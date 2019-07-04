@@ -1,6 +1,6 @@
 class PessoasController < ApplicationController
   def index
-    @pessoas = Pessoa.all
+    @pessoas = Pessoa.all.decorate
     flash.now[:info] = 'Não há pessoas cadastradas no momento' if @pessoas.blank?
   end
 

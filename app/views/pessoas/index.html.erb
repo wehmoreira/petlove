@@ -11,8 +11,8 @@
     <tr>
       <td><%= pessoa.nome %></td>
       <td><%= pessoa.documento %></td>
-      <td><%= pessoa.data_nascimento %></td>
-      <td><%= link_to 'Show', pessoa_path(pessoa) %></td>
+      <td><%= pessoa.data_nascimento_formatada %></td>
+      <td><%= link_to 'Mostrar', pessoa_path(pessoa) %></td>
     </tr>
   <% end %>
 </table>
