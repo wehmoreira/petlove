@@ -21,7 +21,7 @@ describe Pessoa, type: :model do
         subject.data_nascimento = ''
         expect(saved).to eq(false)
       end
-      it 'tem a formatação correta' do
+      it 'deve ser uma data válida' do
         subject.data_nascimento = 'Lorem ipsum dolor sit amet'
         expect(saved).to eq(false)
       end
