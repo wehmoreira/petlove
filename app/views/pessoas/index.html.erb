@@ -1,0 +1,18 @@
+<h1>Pessoas</h1>
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Documento</th>
+    <th>Data de nascimento</th>
+    <th></th>
+  </tr>
+
+  <% @pessoas.each do |pessoa| %>
+    <tr>
+      <td><%= pessoa.nome %></td>
+      <td><%= pessoa.documento %></td>
+      <td><%= pessoa.data_nascimento %></td>
+      <td><%= link_to 'Show', pessoa_path(pessoa) %></td>
+    </tr>
+  <% end %>
+</table>
