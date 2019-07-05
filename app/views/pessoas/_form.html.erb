@@ -1,0 +1,17 @@
+<%= form_with scope: :pessoa, url: pessoas_path, local: true do |form| %>
+  <p>
+    <%= form.label :nome %><br>
+    <%= form.text_field :nome %>
+  </p>
+  <p>
+    <%= form.label :documento %><br>
+    <%= form.text_field :documento %>
+  </p>
+  <p>
+    <%= form.label :data_nascimento, 'Data de nascimento (dd/mm/AAAA)' %><br>
+    <%= form.text_field :data_nascimento %>
+  </p>
+  <p>
+    <%= form.submit 'Cadastrar' %>
+  </p>
+<% end %>

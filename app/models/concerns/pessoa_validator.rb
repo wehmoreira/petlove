@@ -3,7 +3,7 @@ class PessoaValidator < ActiveModel::Validator
     begin
       Date.parse(record.data_nascimento.to_s)
     rescue ArgumentError
-      record.errors.add(:data_nascimento, 'data inválida')
+      record.errors.add(:data_nascimento, 'inválida!')
     end
   end
 end
