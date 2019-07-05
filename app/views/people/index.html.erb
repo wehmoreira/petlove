@@ -1,0 +1,20 @@
+<h1>Pessoas</h1>
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Documento</th>
+    <th>Data de nascimento</th>
+    <th></th>
+  </tr>
+
+  <% @people.each do |person| %>
+    <tr>
+      <td><%= person.nome %></td>
+      <td><%= person.documento %></td>
+      <td><%= person.data_nascimento_formatada %></td>
+      <td><%= link_to 'Mostrar', person_path(person) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Incluir pessoa', new_person_path %>

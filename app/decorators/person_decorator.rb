@@ -1,4 +1,4 @@
-class PessoaDecorator < Draper::Decorator
+class PersonDecorator < Draper::Decorator
   delegate_all
 
   def data_nascimento_formatada

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe Pessoa, type: :model do
+describe Person, type: :model do
   context 'validação' do
-    subject { build(:pessoa) }
+    subject { build(:person) }
     let(:saved) { subject.save }
     context 'nome' do
       it 'deve conter o campo `nome`' do

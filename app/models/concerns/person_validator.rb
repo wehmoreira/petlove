@@ -1,4 +1,4 @@
-class PessoaValidator < ActiveModel::Validator
+class PersonValidator < ActiveModel::Validator
   def validate(record)
     begin
       Date.parse(record.data_nascimento.to_s)
