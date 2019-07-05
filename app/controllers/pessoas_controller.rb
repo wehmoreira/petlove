@@ -8,6 +8,14 @@ class PessoasController < ApplicationController
   end
 
   def create
+    @pessoa = Pessoa.new(permitted_params)
+    if @pessoa.save
+      flash[:success] = 'Pessoa incluída!'
+      redirect_to @pessoa
+    else
+      flash.now[:error] = @pessoa.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def edit
@@ -20,5 +28,11 @@ class PessoasController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def permitted_params
+    params.require(:pessoa).permit(:nome, :documento, :data_nascimento)
   end
 end
