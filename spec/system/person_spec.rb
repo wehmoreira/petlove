@@ -35,7 +35,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
           fill_in 'person[documento]', with: attrs[:documento]
           fill_in 'person[data_nascimento]', with: attrs[:data_nascimento]
           click_button 'Cadastrar'
-          expect(page).to have_text('Nome deve ser preenchido!')
+          expect(page).to have_text('Nome não pode ficar em branco')
         end
       end
       context 'não preenchendo o documento' do
@@ -43,7 +43,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
           fill_in 'person[nome]', with: attrs[:nome]
           fill_in 'person[data_nascimento]', with: attrs[:data_nascimento]
           click_button 'Cadastrar'
-          expect(page).to have_text('Documento deve ser preenchido!')
+          expect(page).to have_text('Documento não pode ficar em branco')
         end
       end
       context 'não preenchendo data de nascimento' do
@@ -51,7 +51,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
           fill_in 'person[nome]', with: attrs[:nome]
           fill_in 'person[documento]', with: attrs[:documento]
           click_button 'Cadastrar'
-          expect(page).to have_text('Data nascimento deve ser preenchido!')
+          expect(page).to have_text('Data nascimento não pode ficar em branco')
         end
       end
       context 'preenchendo com data de nascimento inválida' do

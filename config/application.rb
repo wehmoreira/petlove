@@ -29,5 +29,8 @@ module Petlove
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Setting brazilian portuguese as default language
+    config.i18n.default_locale = :"pt-BR"
   end
 end

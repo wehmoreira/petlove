@@ -1,7 +1,6 @@
 class Person < ApplicationRecord
-  ERROR_MSG = 'deve ser preenchido!'
-  validates :nome, presence: { message: ERROR_MSG }
-  validates :documento, presence: { message: ERROR_MSG }
-  validates :data_nascimento, presence: { message: ERROR_MSG }
+  validates :nome, presence: true
+  validates :documento, presence: true
+  validates :data_nascimento, presence: true
   validates_with PersonValidator
 end
