@@ -1,4 +1,6 @@
 class Person < ApplicationRecord
+  has_many  :animals
+
   validates :nome, presence: true
   validates :documento, presence: true
   validates :data_nascimento, presence: true

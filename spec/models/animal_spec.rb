@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Animal, type: :model do
-  context 'validação' do
+  context 'validações' do
     subject { build(:animal) }
     let(:saved) { subject.save }
     context 'nome' do
@@ -33,11 +33,38 @@ describe Animal, type: :model do
         expect(saved).to eq(true)
         expect(subject.custo_mensal).to eq(5.11)
       end
+      it 'não deve incluir mais um animal se o dono tiver custos com animais acima de 1000' do
+        subject.person = create(:person)
+        subject.person.animals << create(:animal, custo_mensal: 999.99)
+        expect(saved).to eq(false)
+      end
     end
     context 'tipo' do
       it 'não pode ser vazio' do
         subject.tipo = ''
         expect(saved).to eq(false)
+      end
+      context 'Andorinhas' do
+        before { subject.tipo = 'Andorinha' }
+        it 'não podem ter donos menores de 18 anos' do
+          subject.person = create(:person, data_nascimento: 18.years.ago + 1.day)
+          expect(saved).to eq(false)
+        end
+        it 'podem ter donos maiores de 18 anos' do
+          subject.person = create(:person, data_nascimento: 18.years.ago)
+          expect(saved).to eq(true)
+        end
+      end
+      context 'Gatos' do
+        before { subject.tipo = 'Gato' }
+        it 'não podem ter donos com nome começando com `A`' do
+          subject.person = create(:person, nome: 'Adalberto')
+          expect(saved).to eq(false)
+        end
+        it 'podem ter donos com nome começando com qualquer outra letra' do
+          subject.person = create(:person, nome: 'Eustácio')
+          expect(saved).to eq(true)
+        end
       end
     end
   end
