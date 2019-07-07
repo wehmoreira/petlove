@@ -13,4 +13,6 @@
 </p>
 
 <%= link_to 'Editar pessoa', edit_person_path(@person) %>
+<%= link_to 'Apagar', person_path(@person), method: :delete, data: { confirm: 'Tem certeza?' } %>
+<br>
 <%= link_to 'Voltar', people_path %>

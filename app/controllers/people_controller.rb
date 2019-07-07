@@ -40,6 +40,11 @@ class PeopleController < ApplicationController
   end
 
   def destroy
+    @person = Person.find(params[:id])
+    @person.destroy
+    flash[:success] = 'Pessoa excluída!'
+
+    redirect_to people_path
   end
 
   private

@@ -89,4 +89,19 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       end
     end
   end
+  context 'DELETE /people/:id' do
+    before { person }
+    let(:person) { create(:person) }
+    it 'deve apagar a pessoa do sistema' do
+      expect { delete person_path(person.id) }.to change(Person, :count).by(-1)
+    end
+    it 'exibe informação de sucesso' do
+      delete person_path(person.id)
+      expect(flash[:success]).to be_present
+    end
+    it 'redireciona para `index`' do
+      delete person_path(person.id)
+      expect(response).to redirect_to("/people")
+    end
+  end
 end

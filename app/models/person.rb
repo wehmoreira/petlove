@@ -1,5 +1,5 @@
 class Person < ApplicationRecord
-  has_many  :animals
+  has_many  :animals, dependent: :delete_all
 
   validates :nome, presence: true
   validates :documento, presence: true
