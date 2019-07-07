@@ -1,2 +1,16 @@
-<h1>Pessoas#show</h1>
-<p>Find me in app/views/people/show.html.erb</p>
+<h1>Pessoas</h1>
+<p>
+  <strong>Nome:</strong>
+  <%= @person.nome %>
+</p>
+<p>
+  <strong>Documento:</strong>
+  <%= @person.documento %>
+</p>
+<p>
+  <strong>Data de nascimento:</strong>
+  <%= @person.data_nascimento %>
+</p>
+
+<%= link_to 'Editar pessoa', edit_person_path(@person) %>
+<%= link_to 'Voltar', people_path %>

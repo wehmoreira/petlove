@@ -46,4 +46,32 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       end
     end
   end
+  context 'GET /person' do
+    before { allow(Person).to receive(:find).with(person.id.to_s).and_return(person) }
+    let(:person) { create(:person) }
+    it 'renderiza `show`' do
+      get person_path(person.id)
+      assert_response :success
+    end
+  end
+  context 'PUT /person' do
+    before do
+      request
+      allow(Person).to receive(:find).with(person.id).and_return(person)
+    end
+    let(:person) { create(:person) }
+    let(:request) { put person_path(person.id), :params => { :person => person_params } }
+    context 'parâmetros corretos' do
+      let(:person_params) { FactoryBot.attributes_for(:person).merge(nome: "Nome Alterado") }
+      it 'altera os dados de uma pessoa' do
+        expect(Person.first.nome).to eq("Nome Alterado")
+      end
+      it 'redireciona para /people/:id' do
+        expect(response).to redirect_to("/people/#{person.id}")
+      end
+      it 'exibe informação de sucesso' do
+        expect(flash[:success]).to be_present
+      end
+    end
+  end
 end

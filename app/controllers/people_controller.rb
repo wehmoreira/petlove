@@ -5,6 +5,7 @@ class PeopleController < ApplicationController
   end
 
   def new
+    @person = Person.new
   end
 
   def create
@@ -19,12 +20,23 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    @person = Person.find(params[:id])
   end
 
   def show
+    @person = Person.find(params[:id])
   end
 
   def update
+    @person = Person.find(params[:id])
+
+    if @person.update(permitted_params)
+      flash[:success] = 'Pessoa incluída!'
+    else
+      flash[:error] = @person.errors.full_messages.to_sentence
+    end
+
+    redirect_to @person
   end
 
   def destroy

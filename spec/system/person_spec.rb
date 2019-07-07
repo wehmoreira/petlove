@@ -34,7 +34,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
         it 'exibe mensagem de erro' do
           fill_in 'person[documento]', with: attrs[:documento]
           fill_in 'person[data_nascimento]', with: attrs[:data_nascimento]
-          click_button 'Cadastrar'
+          click_button 'Salvar'
           expect(page).to have_text('Nome não pode ficar em branco')
         end
       end
@@ -42,7 +42,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
         it 'exibe mensagem de erro' do
           fill_in 'person[nome]', with: attrs[:nome]
           fill_in 'person[data_nascimento]', with: attrs[:data_nascimento]
-          click_button 'Cadastrar'
+          click_button 'Salvar'
           expect(page).to have_text('Documento não pode ficar em branco')
         end
       end
@@ -50,7 +50,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
         it 'exibe mensagem de erro' do
           fill_in 'person[nome]', with: attrs[:nome]
           fill_in 'person[documento]', with: attrs[:documento]
-          click_button 'Cadastrar'
+          click_button 'Salvar'
           expect(page).to have_text('Data nascimento não pode ficar em branco')
         end
       end
@@ -59,7 +59,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
           fill_in 'person[nome]', with: attrs[:nome]
           fill_in 'person[documento]', with: attrs[:documento]
           fill_in 'person[data_nascimento]', with: 'Lorem Ipsum Dolor Sit Amet'
-          click_button 'Cadastrar'
+          click_button 'Salvar'
           expect(page).to have_text('Data nascimento inválida!')
         end
       end
@@ -69,7 +69,65 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
         fill_in 'person[nome]', with: attrs[:nome]
         fill_in 'person[documento]', with: attrs[:documento]
         fill_in 'person[data_nascimento]', with: attrs[:data_nascimento]
-        click_button 'Cadastrar'
+        click_button 'Salvar'
+        expect(page).to have_text('Pessoa incluída!')
+      end
+    end
+  end
+  context 'show' do
+    before { create(:person, nome: 'Lorem Ipsum Dolor') }
+    it 'exibe as informações da pessoa cadastrada' do
+      visit people_path
+      click_link 'Mostrar'
+      expect(page).to have_text('Lorem Ipsum Dolor')
+    end
+  end
+  context 'edit' do
+    before do
+      create(:person)
+      visit people_path
+      click_link('Mostrar')
+      click_link('Editar pessoa')
+    end
+    it 'acessa página de alteração do cadastro de pessoas' do
+      expect(page).to have_text('Editar pessoa')
+    end
+    context 'parâmetros inválidos' do
+      context 'alterando nome para vazio' do
+        it 'exibe mensagem de erro' do
+          fill_in 'person[nome]', with: ''
+          click_button 'Salvar'
+          expect(page).to have_text('Nome não pode ficar em branco')
+        end
+      end
+      context 'não preenchendo o documento' do
+        it 'exibe mensagem de erro' do
+          fill_in 'person[documento]', with: ''
+          click_button 'Salvar'
+          expect(page).to have_text('Documento não pode ficar em branco')
+        end
+      end
+      context 'não preenchendo data de nascimento' do
+        it 'exibe mensagem de erro' do
+          fill_in 'person[data_nascimento]', with: ''
+          click_button 'Salvar'
+          expect(page).to have_text('Data nascimento não pode ficar em branco')
+        end
+      end
+      context 'preenchendo com data de nascimento inválida' do
+        it 'exibe mensagem de erro' do
+          fill_in 'person[data_nascimento]', with: 'Lorem Ipsum Dolor Sit Amet'
+          click_button 'Salvar'
+          expect(page).to have_text('Data nascimento inválida!')
+        end
+      end
+    end
+    context 'parâmetros válidos' do
+      it 'exibe mensagem de sucesso' do
+        fill_in 'person[nome]', with: 'Nome Teste II'
+        fill_in 'person[documento]', with: '6666666666'
+        fill_in 'person[data_nascimento]', with: '01/01/1922'
+        click_button 'Salvar'
         expect(page).to have_text('Pessoa incluída!')
       end
     end
