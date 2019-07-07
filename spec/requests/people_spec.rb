@@ -19,6 +19,13 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       end
     end
   end
+  context 'GET /people/new' do
+    before { allow(Person).to receive(:new).and_return(Person.new) }
+    it 'renderiza `new`' do
+      get new_person_path
+      assert_response :success
+    end
+  end
   describe 'POST /people' do
     let(:request) { post people_path, :params => { :person => person_params } }
     context 'parâmetros corretos' do
@@ -46,7 +53,7 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       end
     end
   end
-  context 'GET /person' do
+  context 'GET /people/:id' do
     before { allow(Person).to receive(:find).with(person.id.to_s).and_return(person) }
     let(:person) { create(:person) }
     it 'renderiza `show`' do
@@ -54,13 +61,21 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       assert_response :success
     end
   end
-  context 'PUT /person' do
+  context 'GET /people/:id/edit' do
+    before { allow(Person).to receive(:find).with(person.id.to_s).and_return(person) }
+    let(:person) { create(:person) }
+    it 'renderiza `edit`' do
+      get edit_person_path(person.id)
+      assert_response :success
+    end
+  end
+  context 'PATCH /people/:id' do
     before do
       request
       allow(Person).to receive(:find).with(person.id).and_return(person)
     end
     let(:person) { create(:person) }
-    let(:request) { put person_path(person.id), :params => { :person => person_params } }
+    let(:request) { patch person_path(person.id), :params => { :person => person_params } }
     context 'parâmetros corretos' do
       let(:person_params) { FactoryBot.attributes_for(:person).merge(nome: "Nome Alterado") }
       it 'altera os dados de uma pessoa' do
