@@ -4,6 +4,7 @@ class Animal < ApplicationRecord
   validates :nome, presence: true
   validates :tipo, presence: true
   validates :custo_mensal, numericality: { greater_than_or_equal_to: 0 }
+  validates :person_id, presence: true
   validates_with TipoValidator, CustoMensalValidator
 
   def custo_mensal=(valor)

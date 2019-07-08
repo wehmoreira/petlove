@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe Animal, type: :model do
   context 'validações' do
-    subject { build(:animal) }
+    let(:person) { create(:person) }
+    subject { build(:animal, person_id: person.id) }
     let(:saved) { subject.save }
     context 'nome' do
       it 'não pode ser vazio' do
