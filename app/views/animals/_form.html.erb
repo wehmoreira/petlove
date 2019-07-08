@@ -1,0 +1,17 @@
+<%= form_with(model: [ @person, @person.animals.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :nome %><br>
+    <%= form.text_field :nome %>
+  </p>
+  <p>
+    <%= form.label :tipo %><br>
+    <%= form.text_field :tipo %>
+  </p>
+  <p>
+    <%= form.label :custo_mensal %><br>
+    <%= form.text_field :custo_mensal %>
+  </p>
+  <p>
+    <%= form.submit 'Salvar' %>
+  </p>
+<% end %>

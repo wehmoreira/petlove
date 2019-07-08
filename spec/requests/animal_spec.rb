@@ -16,4 +16,30 @@ describe 'gerenciamento de animais no sistema', type: :request do
       end
     end
   end
+  describe 'POST /people/:person_id/animals' do
+    before { allow(Person).to receive(:find).with(person.id.to_s).and_return(person) }
+    let(:person) { create(:person) }
+    let(:request) { post person_animals_path(person.id), :params => { animal: animal_params } }
+    context 'parâmetros corretos' do
+      let(:animal_params) { FactoryBot.attributes_for(:animal) }
+      it 'cadastra um novo animal' do
+        expect { request }.to change(Animal, :count).by(1)
+      end
+      it 'redireciona para /people/:id' do
+        request
+        expect(response).to redirect_to("/people/#{person.id}")
+      end
+      it 'exibe mensagem de sucesso' do
+        request
+        expect(flash[:success]).to be_present
+      end
+    end
+    context 'parâmetros incorretos' do
+      before { request }
+      let(:animal_params) { { nome: '', tipo: 'Gato', custo_mensal: '0.1' } }
+      it 'exibe mensagem de erro' do
+        expect(flash[:error]).to be_present
+      end
+    end
+  end
 end
