@@ -19,7 +19,7 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       end
     end
   end
-  context 'GET /people/new' do
+  describe 'GET /people/new' do
     before { allow(Person).to receive(:new).and_return(Person.new) }
     it 'renderiza `new`' do
       get new_person_path
@@ -53,7 +53,7 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       end
     end
   end
-  context 'GET /people/:id' do
+  describe 'GET /people/:id' do
     before { allow(Person).to receive(:find).with(person.id.to_s).and_return(person) }
     let(:person) { create(:person) }
     it 'renderiza `show`' do
@@ -61,7 +61,7 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       assert_response :success
     end
   end
-  context 'GET /people/:id/edit' do
+  describe 'GET /people/:id/edit' do
     before { allow(Person).to receive(:find).with(person.id.to_s).and_return(person) }
     let(:person) { create(:person) }
     it 'renderiza `edit`' do
@@ -69,7 +69,7 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       assert_response :success
     end
   end
-  context 'PATCH /people/:id' do
+  describe 'PATCH /people/:id' do
     before do
       request
       allow(Person).to receive(:find).with(person.id).and_return(person)
@@ -89,7 +89,7 @@ describe 'gerenciamento de pessoas no sistema', type: :request do
       end
     end
   end
-  context 'DELETE /people/:id' do
+  describe 'DELETE /people/:id' do
     before { person }
     let(:person) { create(:person) }
     it 'deve apagar a pessoa do sistema' do
