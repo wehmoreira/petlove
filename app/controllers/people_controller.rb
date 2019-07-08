@@ -25,6 +25,7 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id]).decorate
+    flash[:info] = 'Nenhum animal cadastrado para esta pessoa' if @person.animals.empty?
   end
 
   def update
