@@ -1,3 +1,4 @@
+<% unless @people.empty? %>
 <h2>Pessoas</h2>
 <table>
   <tr>
@@ -16,5 +17,6 @@
     </tr>
   <% end %>
 </table>
+<% end %>
 
 <%= link_to 'Incluir pessoa', new_person_path %>
