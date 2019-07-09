@@ -7,6 +7,23 @@ class AnimalsController < ApplicationController
     redirect_to person_path(@person)
   end
 
+  def edit
+    @person = Person.find(params[:person_id])
+    @animal = @person.animals.find(params[:id])
+  end
+
+  def update
+    @person = Person.find(params[:person_id])
+    @animal = @person.animals.find(params[:id])
+    if @animal.update(permitted_params)
+      flash[:success] = 'Animal alterado!'
+    else
+      flash[:error] = @animal.errors.full_messages.to_sentence
+    end
+
+    redirect_to(@person)
+  end
+
   private
 
   def permitted_params
