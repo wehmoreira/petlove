@@ -1,4 +1,4 @@
-<h1>Pessoa</h1>
+<h2>Pessoa</h2>
 <p>
   <strong>Nome:</strong>
   <%= @person.nome %>
@@ -14,6 +14,9 @@
 <%= link_to 'Editar pessoa', edit_person_path(@person) %>
 <%= link_to 'Apagar pessoa', person_path(@person), method: :delete, data: { confirm: 'Tem certeza?' } %>
 <br>
+<div class="line"></div>
+<br>
+<% unless @person.animals.empty? %>
 <h2>Pets</h2>
 <table>
   <tr>
@@ -25,6 +28,7 @@
   </tr>
     <%= render @person.animals %>
 </table>
+<% end %>
 <br>
 <h2>Cadastrar um animal</h2>
 <%= render 'animals/form' %>
