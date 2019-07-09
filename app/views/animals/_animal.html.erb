@@ -1,19 +1,7 @@
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Tipo</th>
-    <th>Custo mensal</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @person.animals.each do |animal| %>
-    <tr>
-      <td><%= animal.nome %></td>
-      <td><%= animal.tipo %></td>
-      <td><%= number_to_currency(animal.custo_mensal, unit: "R$", separator: ",", delimiter: ".") %></td>
-      <td><%= link_to 'Editar', edit_person_animal_path(animal) %></td>
-      <td><%= link_to 'Apagar', person_animal_path(@person, animal), method: :delete, data: { confirm: 'Tem certeza?' } %></td>
-    </tr>
-  <% end %>
-</table>
+<tr>
+  <td><%= animal.nome %></td>
+  <td><%= animal.tipo %></td>
+  <td><%= number_to_currency(animal.custo_mensal, unit: "R$", separator: ",", delimiter: ".") %></td>
+  <td><%= link_to 'Editar', edit_person_animal_path(animal) %></td>
+  <td><%= link_to 'Apagar', person_animal_path(@person, animal), method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+</tr>

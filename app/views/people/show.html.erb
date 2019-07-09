@@ -15,7 +15,16 @@
 <%= link_to 'Apagar pessoa', person_path(@person), method: :delete, data: { confirm: 'Tem certeza?' } %>
 <br>
 <h2>Pets</h2>
-<%= render @person.animals %>
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Tipo</th>
+    <th>Custo mensal</th>
+    <th></th>
+    <th></th>
+  </tr>
+    <%= render @person.animals %>
+</table>
 <br>
 <h2>Cadastrar um animal</h2>
 <%= render 'animals/form' %>
