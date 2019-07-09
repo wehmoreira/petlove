@@ -1,4 +1,4 @@
-<%= form_with(model: [ @person, @person.animals.build ], local: true) do |form| %>
+<%= form_with(model: [ @person, (@animal or @person.animals.build) ], local: true) do |form| %>
   <p>
     <%= form.label :nome %><br>
     <%= form.text_field :nome %>
