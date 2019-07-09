@@ -102,6 +102,14 @@ describe 'gerenciamento de animais', type: :system do
         end
       end
     end
+    context 'apagando um animal' do
+      let(:person) { create(:person_with_animals) }
+      it 'exibe opção de deletar um animal' do
+        first(:xpath, "//tr/td/a", :text => 'Apagar').click
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_text('Animal excluído!')
+      end
+    end
   end
   context 'editando um animal' do
     before { visit edit_person_animal_path(person.id, animal.id) }

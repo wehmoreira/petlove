@@ -24,6 +24,15 @@ class AnimalsController < ApplicationController
     redirect_to(@person)
   end
 
+  def destroy
+    @person = Person.find(params[:person_id])
+    @animal = @person.animals.find(params[:id])
+    @animal.destroy
+    flash[:success] = 'Animal excluído!'
+
+    redirect_to person_path(@person)
+  end
+
   private
 
   def permitted_params

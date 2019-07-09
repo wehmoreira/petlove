@@ -75,4 +75,22 @@ describe 'gerenciamento de animais no sistema', type: :request do
       end
     end
   end
+  describe 'DELETE /people/:person_id/animals/:id' do
+    before do
+      person
+    end
+    let(:person) { create(:person_with_animals) }
+    let(:animal) { person.animals.first }
+    it 'deve apagar o animal do sistema' do
+      expect { delete person_animal_path(person.id, animal.id) }.to change(Animal, :count).by(-1)
+    end
+    it 'exibe informação de sucesso' do
+      delete person_animal_path(person.id, animal.id)
+      expect(flash[:success]).to be_present
+    end
+    it 'redireciona para `index`' do
+      delete person_animal_path(person.id, animal.id)
+      expect(response).to redirect_to("/people/#{person.id}")
+    end
+  end
 end
