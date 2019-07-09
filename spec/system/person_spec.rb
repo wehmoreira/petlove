@@ -136,7 +136,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
     let(:person) { create(:person) }
     it 'exibe opção de deletar pessoa' do
       visit person_path(person.id)
-      click_link 'Apagar'
+      click_link 'Apagar pessoa'
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_text('Pessoa excluída!')
     end

@@ -12,7 +12,7 @@
   <%= @person.data_nascimento_formatada %>
 </p>
 <%= link_to 'Editar pessoa', edit_person_path(@person) %>
-<%= link_to 'Apagar', person_path(@person), method: :delete, data: { confirm: 'Tem certeza?' } %>
+<%= link_to 'Apagar pessoa', person_path(@person), method: :delete, data: { confirm: 'Tem certeza?' } %>
 <br>
 <h2>Pets</h2>
 <%= render @person.animals %>
