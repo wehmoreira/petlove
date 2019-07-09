@@ -15,6 +15,9 @@ describe 'gerenciamento de animais', type: :system do
       it 'lista os animais cadastrados para a pessoa' do
         expect(page).to have_text(person.animals.first.nome)
       end
+      it 'exibe o custo mensal do animal com vírgula' do
+        expect(page.text).to match(/[\d\.]+,\d\d/)
+      end
     end
     context 'cadastrando um animal' do
       context 'parâmetros válidos' do
