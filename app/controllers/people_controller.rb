@@ -32,7 +32,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
 
     if @person.update(permitted_params)
-      flash[:success] = 'Pessoa incluída!'
+      flash[:success] = 'Pessoa alterada!'
     else
       flash[:error] = @person.errors.full_messages.to_sentence
     end

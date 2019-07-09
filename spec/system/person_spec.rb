@@ -128,7 +128,7 @@ describe 'gerenciamento de pessoas no sistema', type: :system do
         fill_in 'person[documento]', with: '6666666666'
         fill_in 'person[data_nascimento]', with: '01/01/1922'
         click_button 'Salvar'
-        expect(page).to have_text('Pessoa incluída!')
+        expect(page).to have_text('Pessoa alterada!')
       end
     end
   end
